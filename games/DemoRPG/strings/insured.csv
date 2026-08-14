@@ -1,0 +1,4 @@
+key,text,text_insured,tier,width_px,has_diacritics
+intro,Chào mừng đến với trò chơi,Chào!,T1,80,True
+menu_start,Bắt đầu chơi,choi,T3,64,False
+dialog,Xin chào,Chào!,T1,80,True

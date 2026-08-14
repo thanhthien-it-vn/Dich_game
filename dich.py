@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
 """
-Dich_game — CLI chính.
+VigameV1.0 — CLI việt hóa game Trung/Nhật retro.
 
-Một entry point cho toàn bộ pipeline. Chạy từ toolkit, trỏ tới thư mục game.
+Entry point cho toàn bộ pipeline. Chạy từ toolkit, trỏ tới thư mục game.
 
 Ví dụ:
-  python3 dich.py init ../games/MyRPG --encoding gbk
+  python3 dich.py init ../games/MyRPG --encoding gbk --profile win95_16_syllable
   python3 dich.py extract --game ../games/MyRPG
-  python3 dich.py build-font --game ../games/MyRPG
-  python3 dich.py fit --game ../games/MyRPG
+  python3 dich.py build-font-syllable --game ../games/MyRPG
+  python3 dich.py encode --game ../games/MyRPG
   python3 dich.py pipeline --game ../games/MyRPG
   python3 dich.py status --game ../games/MyRPG
+
+Docs: docs/00-START-HERE.md | AI: docs/AI_AGENT_GUIDE.md
 """
 
 from __future__ import annotations

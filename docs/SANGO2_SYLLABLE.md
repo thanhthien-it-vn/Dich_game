@@ -63,16 +63,19 @@ mount c "D:\Game\VigameV1.0\games\MyRPG\game"
 
 ### CD-ROM (nhạc hay)
 
-Lỗi `CD-ROM Driver not found !` = chưa mount ổ D:.
+Đĩa gốc: **CD-ROM vật lý** → rip **CloneCD** → 3 file `.ccd + .img + .sub` (1 đĩa ảo).
 
-1. Copy đĩa CD game vào `games\MyRPG\game\CD-ROM\`:
-   - **Khuyên dùng:** `Sango2.cue` + `Sango2.bin` (có Redbook audio)
-   - Hoặc `Sango2.ccd` + `.img`
-   - Hoặc copy nguyên nội dung đĩa CD (file `SANGO.WAV` ~25MB, v.v.)
+- Track 1 DATA: 11 game + `CRACK/` + file cài Sango2
+- Track 2–25 AUDIO Redbook: nhạc nền (rút CD = mất nhạc)
 
-2. `play_syllable.conf` + `launch_syllable.bat` tự mount CD trước khi chạy game.
+```powershell
+git lfs pull
+python dich.py sango2-cd --game games\MyRPG analyze
+python dich.py sango2-cd --game games\MyRPG cue
+Play Sango2 Syllable.bat
+```
 
-Volume label gốc: `PIONEERV.01` (xem `logs/CD_LIST.TXT`).
+Chi tiết: `games/MyRPG/game/CD-ROM/README.txt`
 
 ### Kiểm tra
 

@@ -41,6 +41,8 @@ def main() -> int:
     cfg["encoding"] = args.encoding
     cfg["source_lang"] = args.source_lang or ("jp" if "shift" in args.encoding else "cn")
     cfg["font_profile"] = args.profile.replace(".json", "")
+    if "syllable" in cfg["font_profile"]:
+        cfg["font_mode"] = "syllable"
     if args.cell:
         cfg["cell_width"], cfg["cell_height"] = args.cell
 
@@ -87,6 +89,7 @@ def main() -> int:
     print(f"  Config:    {cfg_path}")
     print(f"  Encoding:  {cfg['encoding']} ({cfg['source_lang']})")
     print(f"  Profile:   {cfg['font_profile']}")
+    print(f"  Font mode: {cfg.get('font_mode', 'letter')}")
     print()
     print("Bước tiếp:")
     print(f"  1. Copy file game vào {root}/game/  (hoặc dùng --link-game)")

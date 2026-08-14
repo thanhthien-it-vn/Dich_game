@@ -171,7 +171,7 @@ def cmd_encode(args) -> int:
     vi = args.game / cfg["files"]["translated"]
     out = args.game / cfg["files"].get("encoded", "strings/vi.gbk.csv")
     text_col = "text"
-    if args.insured:
+    if getattr(args, "insured", False):
         vi = args.game / cfg["files"]["insured"]
         text_col = "text_insured"
 

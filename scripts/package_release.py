@@ -25,6 +25,7 @@ EXCLUDE_DIRS = {
     ".pytest_cache",
     "releases",
     "node_modules",
+    ".pack_staging",
 }
 EXCLUDE_FILES = {
     ".gitignore",
@@ -37,7 +38,7 @@ EXCLUDE_PREFIXES = (
 
 def should_include(rel: str) -> bool:
     parts = Path(rel).parts
-    if parts and parts[0] in EXCLUDE_DIRS:
+    if any(p in EXCLUDE_DIRS for p in parts):
         return False
     for prefix in EXCLUDE_PREFIXES:
         if rel.replace("\\", "/").startswith(prefix):

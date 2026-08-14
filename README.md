@@ -90,6 +90,29 @@ python3 tools/l10n/check_strings.py --atlas output/win95_16/atlas.json \
 7. Patch binary + hook vi_draw_utf8()
 ```
 
+### Tối ưu chuỗi dịch (viết tắt / bỏ dấu)
+
+```bash
+# Một câu — giới hạn 96px (6 ký tự CJK gốc × 16px)
+python3 tools/l10n/fit_text.py "Chào mừng đến với trò chơi" \
+  --max-width 96 --atlas output/win95_16/atlas.json
+
+# Xem mọi biến thể
+python3 tools/l10n/fit_text.py "Chào mừng đến với trò chơi" \
+  --max-width 96 --atlas output/win95_16/atlas.json --show-all
+
+# Hàng loạt — max-width tự tính từ bản gốc CJK
+python3 tools/l10n/fit_text.py --csv strings_vi.csv --original strings_cn.csv \
+  --atlas output/win95_16/atlas.json -o strings_vi_fitted.csv
+
+# Cấm bỏ dấu (chỉ viết tắt)
+python3 tools/l10n/fit_text.py "..." --max-width 96 --atlas ... --no-diacritics
+```
+
+Thứ tự ưu tiên: **giữ dấu** → viết tắt từ điển → siêu ngắn (`abbrev_rules.json`) → cắt từ → không dấu.
+
+Sửa rules tại `tools/l10n/abbrev_rules.json` (phrases, ultra_short, drop_words).
+
 ## Runtime patch
 
 Copy `runtime/vi_text.c` + `vi_glyphs.h` vào project patch. Implement blit theo backend game.

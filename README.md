@@ -1,127 +1,99 @@
-# Dich_game — Font tiếng Việt cho game DOS / Win95–98
+# Dich_game — Việt hóa game Trung / Nhật (DOS & Win95–98)
 
-Công cụ tạo **bitmap font atlas** tiếng Việt có dấu (UTF-8), tối ưu để việt hóa nhiều game Trung Quốc cổ.
+Toolkit tạo **font tiếng Việt** + xử lý **nguồn Trung (GBK) / Nhật (Shift-JIS)** cho game retro.
+
+## Phạm vi
+
+| Nguồn game | Encoding phổ biến | Font gốc |
+|------------|-------------------|----------|
+| **Trung** (99%) | GBK / GB2312 | 12×12, 16×16 fullwidth |
+| **Nhật** (99%) | Shift-JIS / CP932 | 12×12, 16×16 fullwidth |
+| **Đích** | UTF-8 tiếng Việt | Atlas Latin có dấu thay CJK |
+
+Pipeline: **extract CN/JP → dịch UTF-8 → build font VI → check tràn UI → patch game**
 
 ## Tính năng chính
 
 | Tính năng | Mô tả |
 |-----------|--------|
-| **Pixel-perfect** | Render upscale 4× rồi downscale NEAREST — nét chữ sắc ở 12–16px |
-| **Profile game** | Preset JSON cho DOS 12×12, Win95 14px/16px — không cần nhớ tham số |
-| **Cell cố định** | Khớp font monospace gốc của game (`--cell 12 12`) |
-| **Export đa format** | PNG, JSON, BIN, `.fnt` (BMFont), strip DOS, `vi_glyphs.h` |
-| **Runtime C** | `runtime/vi_text.c` — hook vẽ chữ UTF-8 dùng chung |
-| **L10n tools** | Gom ký tự từ file dịch, kiểm tra text tràn UI |
+| **Font VI pixel-perfect** | Upscale 4× NEAREST — nét sắc 12–16px |
+| **Profile game** | Preset DOS 12×12, Win95 14/16px |
+| **Encoding CN/JP** | GBK, Big5, Shift-JIS, CP932 ↔ UTF-8 |
+| **extract_strings** | Quét binary `.exe`/`.dat` lấy chuỗi CJK |
+| **check_strings** | So độ rộng: gốc CJK (fullwidth) vs bản dịch VI |
+| **Export đa format** | PNG, JSON, BMFont, strip DOS, runtime C |
 
 ## Quick start
 
 ```bash
 pip install -r requirements.txt
-
-# Build tất cả preset
 python3 build_fonts.py
-
-# Hoặc từng profile
-python3 tools/font_atlas/generate.py --profile profiles/dos_12.json
-python3 tools/font_atlas/generate.py --profile profiles/win95_16.json --preview "Nhân vật: Lý Mặc"
 ```
 
-## Profile có sẵn
-
-| Profile | Dùng cho | Cell | Ghi chú |
-|---------|----------|------|---------|
-| `dos_12` | DOS / VGA | 12×12 mono | 1-bit, threshold 130 |
-| `win95_14` | Dialogue Win95 | proportional | 14px, không cố định cell |
-| `win95_16` | Menu / UI RPG | 16×16 mono | Phổ biến nhất |
-| `win95_16_bold` | Tiêu đề, skill | 16×16 mono | Font đậm |
-
-Thêm profile mới: copy `profiles/win95_16.json`, chỉnh `size`, `cell_width/height`, `threshold`.
-
-## Tinh chỉnh nét chữ
+### Game Trung (GBK)
 
 ```bash
-# Pixel sắc, cell khớp font gốc 14×14
-python3 tools/font_atlas/generate.py --size 14 --render pixel --cell 14 14 --scale 4
+# Trích chuỗi từ binary
+python3 tools/l10n/extract_strings.py game.exe --encoding gbk -o strings_cn.csv
 
-# Smooth (anti-alias) cho game Win dùng alpha blending
-python3 tools/font_atlas/generate.py --size 16 --render smooth
+# Convert script
+python3 tools/l10n/convert_text.py script.txt --from gbk -o script.utf8.txt
 
-# DOS 1-bit: chỉnh ngưỡng nếu dấu mờ
-python3 tools/font_atlas/generate.py --profile profiles/dos_12.json --threshold 120
-
-# Căn baseline (dấu không bị cắt)
-python3 tools/font_atlas/generate.py --cell 16 16 --baseline-offset 1
+# Build font + kiểm tra tràn
+python3 tools/font_atlas/generate.py --profile profiles/win95_16.json
+python3 tools/l10n/check_strings.py --atlas output/win95_16/atlas.json \
+  --original strings_cn.csv --translated strings_vi.csv --source gbk
 ```
+
+### Game Nhật (Shift-JIS)
+
+```bash
+python3 tools/l10n/extract_strings.py game.exe --encoding shift_jis -o strings_jp.csv
+python3 tools/l10n/check_strings.py --atlas output/win95_16/atlas.json \
+  --original strings_jp.csv --translated strings_jp_vi.csv --source shift_jis
+```
+
+## Khác biệt Trung vs Nhật (khi việt hóa)
+
+| | Trung (GBK) | Nhật (Shift-JIS) |
+|---|-------------|------------------|
+| Ký tự gốc | Hán giản/thể | Kanji + Hiragana + Katakana |
+| Bytes/char | 2 (hầu hết) | 1–2 (halfwidth/fullwidth) |
+| Font cell | Thường 16×16 | Thường 16×16 (DOS: 12×12) |
+| Tool extract | `--encoding gbk` | `--encoding shift_jis` |
+| Tên riêng | Giữ Hán hoặc phiên âm | Giữ romaji/kanji tùy game |
+
+**Lưu ý:** Bản dịch tiếng Việt **dài hơn nhiều** so với CJK cùng nghĩa — `check_strings --ratio 1.2` thường vẫn báo tràn; cần rút gọn câu hoặc nới UI.
+
+## Profile font
+
+| Profile | Game | Cell |
+|---------|------|------|
+| `dos_12` | DOS CN/JP compact | 12×12 |
+| `win95_16` | RPG Win95 CN/JP | 16×16 |
+| `win95_14` | Dialogue proportional | ~14px |
+| `win95_16_bold` | Tiêu đề | 16×16 bold |
 
 ## Output mỗi lần build
 
-| File | Dùng khi |
-|------|----------|
-| `atlas.png` | Sprite sheet chính |
-| `atlas.json` | Metadata + metrics (variable width) |
-| `atlas.bin` | Engine C/DOS đọc trực tiếp |
-| `atlas.fnt` | BMFont — nhiều engine/tool hỗ trợ |
-| `atlas_strip.png` | Thay tile font liên tiếp trong ROM/pak |
-| `glyph_index.txt` | Tra codepoint → index strip |
-| `vi_glyphs.h` | Header C kèm `runtime/vi_text.c` |
-| `preview.png` | Xem nhanh câu demo |
+`atlas.png`, `atlas.json`, `atlas.bin`, `atlas.fnt`, `atlas_strip.png`, `vi_glyphs.h`, `preview.png`
 
-## Quy trình việt hóa nhiều game
+## Quy trình đầy đủ
 
 ```
-1. Phân tích game → xác định cell size (12/14/16) và encoding gốc
-2. Tạo/chọn profile JSON khớp font gốc
-3. Dịch text → UTF-8
-4. collect_chars.py → atlas chỉ chứa ký tự cần (nhỏ, nhanh load)
-5. check_strings.py → phát hiện text tràn hộp thoại
-6. Patch: thay font gốc + hook vi_draw_utf8()
+1. Xác định nguồn: CN (gbk) hay JP (shift_jis)
+2. extract_strings → CSV
+3. Dịch sang UTF-8 tiếng Việt
+4. collect_chars → atlas tối thiểu
+5. generate font (profile khớp cell game)
+6. check_strings (gốc CJK fullwidth vs VI)
+7. Patch binary + hook vi_draw_utf8()
 ```
 
-### Gom ký tự từ bản dịch (atlas nhỏ hơn)
+## Runtime patch
 
-```bash
-python3 tools/l10n/collect_chars.py translations/*.csv \
-  --merge tools/font_atlas/chars_vi.txt \
-  -o output/chars_mygame.txt
+Copy `runtime/vi_text.c` + `vi_glyphs.h` vào project patch. Implement blit theo backend game.
 
-python3 tools/font_atlas/generate.py --profile profiles/win95_16.json \
-  --chars output/chars_mygame.txt --out output/mygame_font
-```
+## Encoding legacy VN
 
-### Kiểm tra text tràn UI
-
-```bash
-python3 tools/l10n/check_strings.py \
-  --atlas output/win95_16/atlas.json \
-  --original strings_cn.csv \
-  --translated strings_vi.csv \
-  --ratio 1.2
-```
-
-## Tích hợp runtime (patch DLL)
-
-Copy `runtime/vi_text.c`, `runtime/vi_text.h` và `vi_glyphs.h` (generated) vào project patch.
-Implement `ViBlitFn` theo backend game (GDI `SetPixel`, DirectDraw blit, VGA plane write).
-Gọi `vi_draw_utf8()` thay `TextOut` / hàm vẽ chữ gốc.
-
-## Tạo profile cho game mới
-
-```json
-{
-  "name": "my_game",
-  "size": 14,
-  "render": "pixel",
-  "scale": 4,
-  "cell_width": 14,
-  "cell_height": 14,
-  "monospace": true,
-  "one_bit": false,
-  "chars": "chars_vi.txt",
-  "out": "output/my_game",
-  "notes": "Mô tả font gốc tìm được trong game"
-}
-```
-
-## Lưu ý encoding
-
-Tool dùng **UTF-8**. Game cũ có thể cần TCVN3/VNI — có thể thêm converter riêng trước bước patch binary.
+Tool dùng UTF-8. TCVN3/VNI có thể thêm converter nếu cần cho tool dịch cũ.

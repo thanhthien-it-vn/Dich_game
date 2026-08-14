@@ -254,6 +254,21 @@ def cmd_sango2_verify(args) -> int:
     ], "Verify Sango2 deploy")
 
 
+def cmd_sango2_cd(args) -> int:
+    ccd = args.game / "game" / "CD-ROM" / "Sango2.ccd"
+    cmd = [
+        sys.executable, str(TOOLKIT / "tools/adapters/sango2/analyze_cd.py"),
+        "--ccd", str(ccd),
+        args.cd_cmd,
+    ]
+    if args.cd_cmd == "cue":
+        if args.output:
+            cmd.extend(["-o", str(args.output)])
+    elif args.cd_cmd == "extract":
+        cmd.extend(["-o", str(args.output), "--only", args.only])
+    return _run(cmd, f"Sango2 CD {args.cd_cmd}")
+
+
 def cmd_pipeline(args) -> int:
     cfg = load_game_config(args.game)
     steps = [cmd_extract, cmd_build_font, cmd_fit]
@@ -347,6 +362,16 @@ def main() -> int:
     p_sv = sub.add_parser("sango2-verify", help="Kiểm tra deploy syllable")
     p_sv.add_argument("--game", type=Path, required=True)
     p_sv.set_defaults(func=cmd_sango2_verify)
+
+    p_cd = sub.add_parser("sango2-cd", help="Phân tích / convert / extract CD CloneCD")
+    p_cd.add_argument("--game", type=Path, required=True)
+    p_cd.add_argument("cd_cmd", choices=["analyze", "cue", "extract"])
+    p_cd.add_argument("-o", "--output", type=Path, help="Output (cue/extract)")
+    p_cd.add_argument(
+        "--only", choices=["all", "crack", "sango2-data"], default="all",
+        help="extract: all | crack | sango2-data",
+    )
+    p_cd.set_defaults(func=cmd_sango2_cd)
 
     args = parser.parse_args()
     return args.func(args)

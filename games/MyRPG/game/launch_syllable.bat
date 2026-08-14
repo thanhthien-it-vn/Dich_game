@@ -4,21 +4,14 @@ setlocal
 
 cd /d C:\
 
-REM --- Mount CD-ROM (can MSCDEX + nhac SANGO.WAV) ---
+REM --- Mount CD-ROM (can MSCDEX + nhac Redbook track 2-25) ---
+REM Uu tien: Sango2.cue (tu .ccd) > .ccd > folder
 if exist C:\CD-ROM\Sango2.cue (
   imgmount d C:\CD-ROM\Sango2.cue -t cdrom
   goto :cd_ok
 )
 if exist C:\CD-ROM\Sango2.ccd (
   imgmount d C:\CD-ROM\Sango2.ccd -t cdrom
-  goto :cd_ok
-)
-if exist C:\CD-ROM\SANGO2.CUE (
-  imgmount d C:\CD-ROM\SANGO2.CUE -t cdrom
-  goto :cd_ok
-)
-if exist C:\Sango2\Sango2.ccd (
-  imgmount d C:\Sango2\Sango2.ccd -t cdrom
   goto :cd_ok
 )
 if exist C:\CD-ROM\ (
@@ -29,9 +22,8 @@ if exist C:\CD-ROM\ (
 echo.
 echo CANH BAO: Khong tim thay CD image!
 echo Dat vao C:\CD-ROM\ :
-echo   Sango2.cue + Sango2.bin   (co nhac CD day du)
-echo   hoac Sango2.ccd + .img
-echo   hoac copy noi dung dia CD vao thu muc CD-ROM
+echo   Sango2.cue + Sango2.img   (CloneCD — co nhac CD day du)
+echo   hoac Sango2.ccd + .img + .sub
 echo.
 goto :play
 

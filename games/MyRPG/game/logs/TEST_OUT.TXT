@@ -1,0 +1,9 @@
+MOUNT OK
+
+ Volume in drive D is PIONEERV.01
+ Volume Serial Number is 0000-1234
+ Directory of D:\CRACK
+
+File not found - "D:\CRACK\2.*"
+    0 File(s)                 0 Bytes
+    0 Dir(s)                  0 Bytes free

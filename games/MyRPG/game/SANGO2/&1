@@ -1,0 +1,14 @@
+DOS/4GW error (2001): exception 00h (divide by zero) at 160:00217A5B
+TSF32: prev_tsf32 5288
+SS       168 DS       168 ES       168 FS       1D8 GS        20
+EAX     6379 EBX        0 ECX       FF EDX        0
+ESI   1FF30C EDI   356914 EBP   356730 ESP   356728
+CS:IP  160:00217A5B ID 00 COD     6379 FLG      246
+CS=  160, USE32, page granular, limit FFFFFFFF, base        0, acc CF9A
+SS=  168, USE32, page granular, limit FFFFFFFF, base        0, acc CF92
+DS=  168, USE32, page granular, limit FFFFFFFF, base        0, acc CF92
+ES=  168, USE32, page granular, limit FFFFFFFF, base        0, acc CF92
+FS=  1D8, USE16, byte granular, limit     883F, base    16760, acc 92
+GS=   20, USE16, byte granular, limit     FFFF, base     8240, acc 93
+CR0: PG:0 ET:1 TS:0 EM:0 MP:0 PE:1   CR2: 0 CR3: 0
+Crash address (unrelocated) = 1:00018A5B

@@ -1,0 +1,8 @@
+=== LAUNCH TEST ===
+CD=
+SAN2.EXE OK
+SAN2-VN.EXE OK
+UNIVBE OK
+Running UNIVBE...
+Running SAN2-VN...
+EXIT=

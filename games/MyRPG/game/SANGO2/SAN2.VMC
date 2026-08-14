@@ -1,0 +1,6 @@
+memmin=512
+memmax=4096
+swapmin=4096
+virtualsize=8192
+deleteswap
+swapname=SAN2VMEM.SWP

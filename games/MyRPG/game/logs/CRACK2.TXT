@@ -1,0 +1,20 @@
+START
+Insufficient disk space - SAN2.EXE
+File not found - c:\sango2\san2.exe
+Insufficient disk space - SAN2.VMC
+Insufficient disk space - SAN2.VMC
+   0 File(s) copied.
+Insufficient disk space - NEWHERO.DAT
+Insufficient disk space - NEWHERO.DAT
+   0 File(s) copied.
+Insufficient disk space - GO8MB.BAT
+Insufficient disk space - GO8MB.BAT
+   0 File(s) copied.
+
+ Volume in drive C is C_DRIVE
+ Volume Serial Number is FA98-9BBD
+ Directory of C:\SANGO2
+
+File not found - "C:\SANGO2\SAN2.EXE"
+    0 File(s)                 0 Bytes
+    0 Dir(s)      2,147,418,112 Bytes free

@@ -1,0 +1,322 @@
+===== CD ROOT =====
+
+ Volume in drive D is PIONEERV.01
+ Volume Serial Number is 0000-1234
+ Directory of D:\
+
+1024     GUS                265 01/05/1996 10:17p
+ADLIB    MDI             14,986 06/18/1995  6:00a
+ADLIBG   MDI             16,377 06/18/1995  6:00a
+ADRV688  DIG             11,278 06/18/1995  6:00a
+AILDRVR  LST             17,340 06/18/1995  6:00a
+BASIC    GRP            496,837 08/02/1996 10:23a
+BIGMAP   GRP          2,283,690 03/14/1996 10:56p
+CHINFONT BIG             28,286 06/18/1993 10:22a
+CHINFONT COD              6,595 06/18/1993 10:45a
+CLEAR    COM                  9 07/31/1996  1:59p
+COMIX          <DIR>            08/26/1996  6:29p
+CRACK          <DIR>            08/27/1996  3:37p
+DIG      INI                207 12/06/1995  5:39p
+DIM      GRP            773,720 07/15/1996 11:47a
+DOS4GW   EXE            265,420 04/14/1995  7:32p
+EFFECT   TAB                304 07/31/1996  4:15p
+EFFECT   WAV          1,699,767 07/31/1996  3:50p
+ESFM     MDI             15,084 06/18/1995  6:00a
+EVENT    ANM          6,040,197 08/02/1996 10:47a
+FINAL          <DIR>            08/26/1996 12:26p
+FONT16   PAT            427,328 05/30/1995 10:17a
+FONT24   PAT            988,196 05/24/1995 10:23a
+FOZZIE         <DIR>            08/26/1996  6:20p
+GO4MB    BAT                 41 08/02/1996 11:10a
+GO8MB    BAT                 15 08/02/1996 11:10a
+GSE            <DIR>            08/27/1996 10:58a
+HEAD     GRP          2,229,177 07/28/1996  1:42a
+HI       COM                992 09/25/1992  6:45p
+INST     EXE             63,602 08/02/1996  6:06p
+INSTALL  BAT              2,486 08/27/1996 10:17p
+INSTALL  GRP            133,654 07/29/1996  9:06p
+ITEM     GRP             87,115 03/12/1996  2:05p
+JAMMER   DIG              3,219 06/18/1995  6:00a
+MAPBLK   GRP            954,503 10/30/1995  1:56p
+MAYHEM         <DIR>            08/26/1996  2:29p
+MDI      INI                204 12/06/1995  5:39p
+MEET     GRP            263,507 11/04/1995  0:28a
+MPU401   MDI              1,915 06/18/1995  6:00a
+MT32MPU  MDI              6,980 06/18/1995  6:00a
+MTM            <DIR>            08/26/1996 12:24p
+NEWHERO  DAT              4,920 08/02/1996  3:06p
+NEWORDER       <DIR>            08/26/1996  6:32p
+NULL     MDI              1,609 06/18/1995  6:00a
+OPL3     MDI             16,387 06/18/1995  6:00a
+PAS      MDI             15,425 06/18/1995  6:00a
+PASPLUS  MDI             16,458 06/18/1995  6:00a
+PCSPKR   MDI              4,705 06/18/1995  6:00a
+PROAUDIO DIG              2,127 06/18/1995  6:00a
+PVT_DEMO       <DIR>            08/27/1996  4:40p
+QUAKENEW       <DIR>            08/26/1996  1:28p
+RAP10    DIG              2,849 06/18/1995  6:00a
+RASH           <DIR>            08/27/1996  6:23p
+S22      TBL            358,692 10/30/1995  1:23p
+S2FLI          <DIR>            08/27/1996  3:34p
+SAMPLE   AD               3,622 12/08/1994  2:55p
+SAMPLE   BNK             10,780 06/18/1995  6:00a
+SAMPLE   CAT             10,484 06/18/1995  6:00a
+SAMPLE   OPL              5,591 12/10/1994  3:18p
+SAN2     GRP            193,503 07/31/1996 11:25a
+SAN2     VMC                 54 12/31/1995  0:38a
+SANGO    DAT            209,873 06/28/1996  9:03a
+SANGO    TAB             10,712 07/06/1996  1:42p
+SANGO    WAV         25,305,235 07/06/1996  1:37p
+SANGO2   PAL                768 08/12/1995 11:08p
+SANINST  BAT                430 08/27/1996  2:34p
+SB16     DIG              2,836 06/18/1995  6:00a
+SBAWE32  MDI             32,694 06/18/1995  6:00a
+SBLASTER DIG              2,914 06/18/1995  6:00a
+SBLASTER MDI             15,118 06/18/1995  6:00a
+SBPRO    DIG              2,763 06/18/1995  6:00a
+SBPRO1   MDI             15,471 06/18/1995  6:00a
+SBPRO2   MDI             16,541 06/18/1995  6:00a
+SDOLYMPC       <DIR>            08/27/1996  9:42p
+SETSOUND EXE            168,741 06/18/1995  6:00a
+SIN      COM              1,353 08/27/1996 12:24p
+SNDSCAPE DIG              4,171 06/18/1995  6:00a
+SNDSCAPE MDI              2,971 06/18/1995  6:00a
+SNDSYS   DIG              3,328 06/18/1995  6:00a
+STARWAR        <DIR>            08/26/1996  6:19p
+STORM          <DIR>            08/26/1996  4:05p
+STRIKER        <DIR>            08/26/1996 12:24p
+SWLOGO   PAL                768 08/02/1996 10:20a
+T1       TBL              6,564 07/09/1996 11:43a
+T2       TBL              6,564 07/09/1996 11:43a
+T3       TBL              6,564 07/10/1996  2:02p
+T4       TBL              6,564 07/25/1996  0:26a
+T5       TBL              6,564 07/25/1996  0:51a
+TANDY    MDI              5,010 06/18/1995  6:00a
+ULTRA    DIG              9,478 06/18/1995  6:00a
+ULTRA    MDI             49,672 06/18/1995  6:00a
+UNIVBE   EXE             46,738 05/09/1996  6:45p
+UVCONFIG EXE            259,674 04/01/1995  8:59p
+VS06     XMI              8,704 08/02/1996  5:13p
+VS07     XMI             12,642 08/02/1996  5:30p
+VS10     XMI              8,264 08/02/1996  5:14p
+WARICON  GRP            272,301 07/24/1996 12:49p
+WEATHER  GRP            155,838 11/07/1995 12:22p
+   81 File(s)        44,138,330 Bytes
+   16 Dir(s)                  0 Bytes free
+
+===== CRACK =====
+
+ Volume in drive D is PIONEERV.01
+ Volume Serial Number is 0000-1234
+ Directory of D:\
+
+File not found - "D:\CRACK2.*"
+    0 File(s)                 0 Bytes
+    0 Dir(s)                  0 Bytes free
+
+===== INSTALL.BAT =====
+@echo off
+:start
+cls
+sin
+echo                       +-----------------------------+
+echo                       : ÀÁÂÃÄÅÆÇÈÉ Vol 1 (1996/09)  :
+echo                       +-----------------------------+
+echo                       :   1. ÊËÌÍÎÏÐÑÒÓ      (STG)  :
+echo                       :   2. ÔÕÖ×ØÙÚÛÒÓ      (RPG)  :
+echo                       :   3. COMIX for Win95 (ACT)  :
+echo                       :   4. Final       (Shooting) :
+echo                       :   5. Fozzie For Win95 (ACT) :
+echo                       :   6. MayHem for Win95 (IQ)  :
+echo                       :   7. New Older Win95 (Shoot):
+echo                       :   8. Quake new Map   (ACT)  :
+echo                       :   9. StarWar         (ACT)  :
+echo                       :  10. Storm       (Shooting) :
+echo                       :  11. Striker 96    (Soccer) :
+echo                       :  12. Monster Truck (Racing) :
+echo                       :  13. Private Eye  WIN (AVG) :
+echo                       :  14. SD Olympic 96 DOS (SP) :
+echo                       :  15. ROAD RASH WIN (Racing) :
+echo                       :      Quit (Or [ESC])        :
+echo                       +-----------------------------+
+echo ÿ
+:wait
+hi     23 3 29 16
+if errorlevel 16 goto esc
+if errorlevel 15 goto 15
+if errorlevel 14 goto 14
+if errorlevel 13 goto 13
+if errorlevel 12 goto 12
+if errorlevel 11 goto 11
+if errorlevel 10 goto 10
+if errorlevel 9 goto 9
+if errorlevel 8 goto 8
+if errorlevel 7 goto 7
+if errorlevel 6 goto 6
+if errorlevel 5 goto 5
+if errorlevel 4 goto 4
+if errorlevel 3 goto 3
+if errorlevel 2 goto 2
+if errorlevel 1 goto 1
+goto last
+:1
+clear
+call saninst.bat
+goto end
+:2
+clear
+cd gse
+call install.bat
+goto end
+:3
+clear
+CD comix
+call INSTALL.BAT
+goto end
+:4
+clear
+CD final
+CALL play.BAT
+goto end
+:5
+clear
+CD fozzie
+call install.bat
+goto end
+:6
+clear
+CD mayhem
+call install
+goto end
+:7
+clear
+cd neworder
+call install.bat
+goto end
+:8
+clear
+cd quakenew
+call install.bat
+goto end
+
+:9
+clear
+cd starwar
+call install.bat
+goto end
+
+:10
+clear
+cd storm
+call install.bat
+goto end
+
+:11
+clear
+cd striker
+call install.bat
+goto end
+
+:12
+clear
+cd mtm
+call install.bat
+goto end
+
+:13
+clear
+cd pvt_demo
+call install.bat
+goto end
+
+:14
+clear
+cd sdolympc
+call install.bat
+goto end
+
+:15
+clear
+cd rash
+call install.bat
+goto end
+
+:16
+:esc
+clear
+goto last
+:end
+
+
+PAUSE >nuL
+:last
+
+File not found - 2
+
+===== COPYF.BAT =====
+@echo off
+cls
+echo Now copy all crack file to HardDisk ....
+pause
+if exist C:\sango2\*.* goto C
+if exist D:\sango2\*.* goto D
+if exist E:\sango2\*.* goto E
+if exist F:\sango2\*.* goto F
+GOTO NOT
+
+:C
+echo Copy file to c:\sango2 .............
+copy  SAN2.VMC        C:\SANGO2  /Y
+copy  NEWHERO.DAT     C:\SANGO2  /Y
+copy  GO8MB.BAT       C:\SANGO2  /Y
+copy  SAN2.EXE        C:\SANGO2  /Y
+c:
+cd \sango2
+GOTO DONE
+
+:D
+echo Copy file to c:\sango2 .............
+copy  SAN2.VMC        D:\SANGO2  /Y
+copy  NEWHERO.DAT     D:\SANGO2  /Y
+copy  GO8MB.BAT       D:\SANGO2  /Y
+copy  SAN2.EXE        D:\SANGO2  /Y
+d:
+cd \sango2
+GOTO DONE
+
+:E
+echo Copy file to c:\sango2 .............
+copy  SAN2.VMC        E:\SANGO2  /Y
+copy  NEWHERO.DAT     E:\SANGO2  /Y
+copy  GO8MB.BAT       E:\SANGO2  /Y
+copy  SAN2.EXE        E:\SANGO2  /Y
+e:
+cd \sango2
+GOTO DONE
+
+:F
+echo Copy file to c:\sango2 .............
+copy  SAN2.VMC        F:\SANGO2  /Y
+copy  NEWHERO.DAT     F:\SANGO2  /Y
+copy  GO8MB.BAT       F:\SANGO2  /Y
+copy  SAN2.EXE        F:\SANGO2  /Y
+f:
+cd \sango2
+GOTO DONE
+
+
+
+:DONE
+cls
+ECHO Complete !!
+echo Run go8mb.bat or go4mb.bat to play.
+goto end
+
+:not
+cls
+echo Can't found sango2 in harddisk, please run install.bat from cd-rom !!
+goto end
+
+
+:end
+File not found - 2

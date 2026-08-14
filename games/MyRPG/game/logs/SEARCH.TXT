@@ -1,0 +1,186 @@
+===== SEARCH SAN2.EXE =====
+
+ Volume in drive D is PIONEERV.01
+ Volume Serial Number is 0000-1234
+ Directory of D:\
+
+File not found - "D:\SAN2.EXE"
+    0 File(s)                 0 Bytes
+    0 Dir(s)                  0 Bytes free
+
+ Volume in drive D is PIONEERV.01
+ Volume Serial Number is 0000-1234
+ Directory of D:\CRACK
+
+SAN2     EXE          1,181,459 08/25/1996  3:36a
+    1 File(s)         1,181,459 Bytes
+    0 Dir(s)                  0 Bytes free
+
+ Volume in drive D is PIONEERV.01
+ Volume Serial Number is 0000-1234
+ Directory of D:\CRACK
+
+.              <DIR>            08/27/1996  3:37p
+..             <DIR>            00/00/2028  0:00a
+COPYA    EXE            217,250 08/25/1996 10:45a
+COPYF    BAT              1,297 08/27/1996  3:32p
+COPYFILE BAT                 15 08/27/1996  2:22p
+COPYFILE ORI                 19 08/25/1996  7:42p
+DATA                         70 08/27/1996  2:26p
+DOS4GW   EXE            265,420 04/14/1995  7:32p
+GO8MB    BAT                 17 08/24/1996  3:34p
+NEWHERO  DAT              5,000 08/24/1996  3:39p
+SAN2     EXE          1,181,459 08/25/1996  3:36a
+SAN2     VMC                 92 08/24/1996  3:33p
+UNIVBE   DRV             10,371 08/27/1996  2:18p
+UNIVBE   EXE             46,738 05/09/1996  6:45p
+UVCONFIG EXE            259,674 04/01/1995  8:59p
+   13 File(s)         1,987,422 Bytes
+    2 Dir(s)                  0 Bytes free
+===== CRACK tree =====
+Directory PATH listing for Volume PIONEERV.01
+Volume Serial Number is 0000-1234
+D:\crack  2
+No subdirectories exist
+===== Try copyf =====
+@echo off
+cls
+echo Now copy all crack file to HardDisk ....
+pause
+if exist C:\sango2\*.* goto C
+if exist D:\sango2\*.* goto D
+if exist E:\sango2\*.* goto E
+if exist F:\sango2\*.* goto F
+GOTO NOT
+
+:C
+echo Copy file to c:\sango2 .............
+copy  SAN2.VMC        C:\SANGO2  /Y
+copy  NEWHERO.DAT     C:\SANGO2  /Y
+copy  GO8MB.BAT       C:\SANGO2  /Y
+copy  SAN2.EXE        C:\SANGO2  /Y
+c:
+cd \sango2
+GOTO DONE
+
+:D
+echo Copy file to c:\sango2 .............
+copy  SAN2.VMC        D:\SANGO2  /Y
+copy  NEWHERO.DAT     D:\SANGO2  /Y
+copy  GO8MB.BAT       D:\SANGO2  /Y
+copy  SAN2.EXE        D:\SANGO2  /Y
+d:
+cd \sango2
+GOTO DONE
+
+:E
+echo Copy file to c:\sango2 .............
+copy  SAN2.VMC        E:\SANGO2  /Y
+copy  NEWHERO.DAT     E:\SANGO2  /Y
+copy  GO8MB.BAT       E:\SANGO2  /Y
+copy  SAN2.EXE        E:\SANGO2  /Y
+e:
+cd \sango2
+GOTO DONE
+
+:F
+echo Copy file to c:\sango2 .............
+copy  SAN2.VMC        F:\SANGO2  /Y
+copy  NEWHERO.DAT     F:\SANGO2  /Y
+copy  GO8MB.BAT       F:\SANGO2  /Y
+copy  SAN2.EXE        F:\SANGO2  /Y
+f:
+cd \sango2
+GOTO DONE
+
+
+
+:DONE
+cls
+ECHO Complete !!
+echo Run go8mb.bat or go4mb.bat to play.
+goto end
+
+:not
+cls
+echo Can't found sango2 in harddisk, please run install.bat from cd-rom !!
+goto end
+
+
+:end
+Insufficient disk space - SAN2.EXE
+Insufficient disk space - 1024.GUS
+Insufficient disk space - ADLIB.MDI
+Insufficient disk space - ADLIBG.MDI
+Insufficient disk space - ADRV688.DIG
+Insufficient disk space - AILDRVR.LST
+Insufficient disk space - BASIC.GRP
+Insufficient disk space - BIGMAP.GRP
+Insufficient disk space - CHINFONT.BIG
+Insufficient disk space - CHINFONT.COD
+Insufficient disk space - DIG.INI
+Insufficient disk space - DIM.GRP
+Insufficient disk space - DOS4GW.EXE
+Insufficient disk space - EFFECT.TAB
+Insufficient disk space - EFFECT.WAV
+Insufficient disk space - ESFM.MDI
+Insufficient disk space - EVENT.ANM
+Insufficient disk space - FONT16.PAT
+Insufficient disk space - FONT24.PAT
+Insufficient disk space - GO4MB.BAT
+Insufficient disk space - GO8MB.BAT
+Insufficient disk space - HEAD.GRP
+Insufficient disk space - ITEM.GRP
+Insufficient disk space - JAMMER.DIG
+Insufficient disk space - MAPBLK.GRP
+Insufficient disk space - MDI.INI
+Insufficient disk space - MEET.GRP
+Insufficient disk space - MPU401.MDI
+Insufficient disk space - MT32MPU.MDI
+Insufficient disk space - NEWHERO.DAT
+Insufficient disk space - NULL.MDI
+Insufficient disk space - OPL3.MDI
+Insufficient disk space - PAS.MDI
+Insufficient disk space - PASPLUS.MDI
+Insufficient disk space - PCSPKR.MDI
+Insufficient disk space - PROAUDIO.DIG
+Insufficient disk space - RAP10.DIG
+Insufficient disk space - S22.TBL
+Insufficient disk space - SAMPLE.AD
+Insufficient disk space - SAMPLE.BNK
+Insufficient disk space - SAMPLE.CAT
+Insufficient disk space - SAMPLE.OPL
+Insufficient disk space - SAN2.GRP
+Insufficient disk space - SAN2.VMC
+Insufficient disk space - SANGO.DAT
+Insufficient disk space - SANGO.TAB
+Insufficient disk space - SANGO.WAV
+Insufficient disk space - SANGO2.PAL
+Insufficient disk space - SB16.DIG
+Insufficient disk space - SBAWE32.MDI
+Insufficient disk space - SBLASTER.DIG
+Insufficient disk space - SBLASTER.MDI
+Insufficient disk space - SBPRO.DIG
+Insufficient disk space - SBPRO1.MDI
+Insufficient disk space - SBPRO2.MDI
+Insufficient disk space - SETSOUND.EXE
+Insufficient disk space - SNDSCAPE.DIG
+Insufficient disk space - SNDSCAPE.MDI
+Insufficient disk space - SNDSYS.DIG
+Insufficient disk space - SWLOGO.PAL
+Insufficient disk space - T1.TBL
+Insufficient disk space - T2.TBL
+Insufficient disk space - T3.TBL
+Insufficient disk space - T4.TBL
+Insufficient disk space - T5.TBL
+Insufficient disk space - TANDY.MDI
+Insufficient disk space - ULTRA.DIG
+Insufficient disk space - ULTRA.MDI
+Insufficient disk space - UNIVBE.EXE
+Insufficient disk space - UVCONFIG.EXE
+Insufficient disk space - VS06.XMI
+Insufficient disk space - VS07.XMI
+Insufficient disk space - VS10.XMI
+Insufficient disk space - WARICON.GRP
+Insufficient disk space - WEATHER.GRP
+   0 File(s) copied.

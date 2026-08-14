@@ -1,0 +1,34 @@
+===== SANINST.BAT =====
+ECHO OFF
+ECHO ***************************
+ECHO **     SANGO II v1.0    ***
+ECHO **                      ***
+ECHO **      installing      ***
+ECHO **      ..........      ***
+ECHO ***************************
+COPY UVCONFIG.EXE C:\
+COPY UNIVBE.EXE C:\
+C:\UVCONFIG
+C:\UNIVBE
+INST
+SETSOUND
+cls
+echo Please Run CD-ROM  \Crack\copyf.bat now !!!
+echo   Ex:
+echo Type  D:
+echo       CD \ CRACK
+ECHO       COPYF
+ECHO ON
+File not found - 2
+
+===== CRACK DIR =====
+
+ Volume in drive D is PIONEERV.01
+ Volume Serial Number is 0000-1234
+ Directory of D:\
+
+File not found - "D:\CRACK2.*"
+    0 File(s)                 0 Bytes
+    0 Dir(s)                  0 Bytes free
+
+===== INST.EXE help =====

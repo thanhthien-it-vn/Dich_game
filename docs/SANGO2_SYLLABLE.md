@@ -24,11 +24,41 @@ python dich.py sango2 --game games\MyRPG --patch-font --patch-exe
 | `games/MyRPG/game/SANGO2/FONT16-SYLLABLE.PAT` | Font 16px |
 | `games/MyRPG/patch/SAN2-SYLLABLE.EXE` | EXE đã patch |
 
-## Chơi thử (Windows + DOSBox)
+## Chơi thử (Windows + DOSBox) — BẮT BUỘC deploy
 
-1. Copy `FONT16-SYLLABLE.PAT` → `FONT16-VN.PAT` (backup gốc trước)
-2. Copy `patch/SAN2-SYLLABLE.EXE` → `SANGO2/SAN2-VN.EXE`
-3. Chạy `Play Sango2 VN.bat`
+**Lỗi `吩坏` = EXE đã patch nhưng FONT chưa copy** (game vẫn hiện chữ Hán cũ cho mã A768).
+
+### Bước đúng
+
+```powershell
+cd D:\Game\VigameV1.0
+git pull
+python dich.py sango2 --game games\MyRPG --patch-font --patch-exe
+
+cd games\MyRPG\game
+Deploy Syllable.bat
+Play Sango2 Syllable.bat
+```
+
+`Deploy Syllable.bat` copy:
+- `patch\SAN2-SYLLABLE.EXE` → `SANGO2\SAN2-VN.EXE`
+- `FONT16-SYLLABLE.PAT` → `FONT16.PAT` + `FONT16-VN.PAT`
+- `FONT24-SYLLABLE.PAT` → `FONT24.PAT`
+
+### Sửa đường dẫn DOSBox
+
+Mở `games\MyRPG\game\play_syllable.conf` — dòng `mount c` phải trỏ đúng:
+```
+mount c "D:\Game\VigameV1.0\games\MyRPG\game"
+```
+
+**Không** dùng `play_vn.conf` cũ (trỏ `D:\Game\SAN` — sai thư mục).
+
+### Kiểm tra
+
+```powershell
+python tools\adapters\sango2\verify_deploy.py
+```
 
 ## Thống kê patch (lần chạy đầu)
 

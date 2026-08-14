@@ -28,15 +28,22 @@ python dich.py sango2 --game games\MyRPG --patch-font --patch-exe
 
 **Lỗi `吩坏` = EXE đã patch nhưng FONT chưa copy** (game vẫn hiện chữ Hán cũ cho mã A768).
 
-### Bước đúng
+### Bước đúng (1 lệnh)
 
 ```powershell
 cd D:\Game\VigameV1.0
 git pull
-python dich.py sango2 --game games\MyRPG --patch-font --patch-exe
+python dich.py sango2 --game games\MyRPG --patch-font --patch-exe --deploy
+Play Sango2 Syllable.bat
+```
 
+Hoặc tách bước:
+
+```powershell
+python dich.py sango2 --game games\MyRPG --patch-font --patch-exe
+python dich.py sango2-deploy --game games\MyRPG
+python dich.py sango2-verify --game games\MyRPG
 cd games\MyRPG\game
-Deploy Syllable.bat
 Play Sango2 Syllable.bat
 ```
 

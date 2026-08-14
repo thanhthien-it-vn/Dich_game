@@ -235,7 +235,23 @@ def cmd_sango2(args) -> int:
         cmd.append("--patch-exe")
     if args.patch_font:
         cmd.append("--patch-font")
+    if args.deploy:
+        cmd.append("--deploy")
     return _run(cmd, "Sango2 syllable pipeline")
+
+
+def cmd_sango2_deploy(args) -> int:
+    return _run([
+        sys.executable, str(TOOLKIT / "tools/adapters/sango2/deploy_syllable.py"),
+        "--game", str(args.game),
+    ], "Deploy Sango2 syllable")
+
+
+def cmd_sango2_verify(args) -> int:
+    return _run([
+        sys.executable, str(TOOLKIT / "tools/adapters/sango2/verify_deploy.py"),
+        "--game", str(args.game),
+    ], "Verify Sango2 deploy")
 
 
 def cmd_pipeline(args) -> int:
@@ -321,7 +337,16 @@ def main() -> int:
     p_sango2.add_argument("--game", type=Path, required=True)
     p_sango2.add_argument("--patch-exe", action="store_true")
     p_sango2.add_argument("--patch-font", action="store_true")
+    p_sango2.add_argument("--deploy", action="store_true", help="Deploy EXE+PAT vào SANGO2 sau patch")
     p_sango2.set_defaults(func=cmd_sango2)
+
+    p_sd = sub.add_parser("sango2-deploy", help="Copy SAN2-SYLLABLE + FONT* vào SANGO2")
+    p_sd.add_argument("--game", type=Path, required=True)
+    p_sd.set_defaults(func=cmd_sango2_deploy)
+
+    p_sv = sub.add_parser("sango2-verify", help="Kiểm tra deploy syllable")
+    p_sv.add_argument("--game", type=Path, required=True)
+    p_sv.set_defaults(func=cmd_sango2_verify)
 
     args = parser.parse_args()
     return args.func(args)

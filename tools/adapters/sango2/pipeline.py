@@ -23,6 +23,7 @@ def main() -> int:
     parser.add_argument("--game", type=Path, required=True)
     parser.add_argument("--patch-exe", action="store_true")
     parser.add_argument("--patch-font", action="store_true")
+    parser.add_argument("--deploy", action="store_true", help="Copy EXE+PAT vào SANGO2 sau patch")
     args = parser.parse_args()
 
     game = args.game.resolve()
@@ -74,6 +75,19 @@ def main() -> int:
         print(f"  PAT:  {sango}/FONT16-SYLLABLE.PAT")
     if args.patch_exe:
         print(f"  EXE:  {patch_dir}/SAN2-SYLLABLE.EXE")
+
+    if args.deploy:
+        rc = run(
+            [sys.executable, str(ADAPTER / "deploy_syllable.py"), "--game", str(game)],
+            "Deploy vào SANGO2",
+        )
+        if rc != 0:
+            return rc
+
+    if args.patch_exe or args.patch_font:
+        print("\n  Chơi game: games/MyRPG/game/Play Sango2 Syllable.bat")
+        print("  (Không dùng Play Sango2 VN.bat — trỏ repo cũ D:\\Game\\SAN)")
+
     return 0
 
 

@@ -4,7 +4,9 @@
 from __future__ import annotations
 
 import argparse
+import os
 import re
+import shutil
 import struct
 import sys
 from pathlib import Path
@@ -222,9 +224,94 @@ def cmd_extract(args) -> int:
     return 0
 
 
+def cmd_restore(args) -> int:
+    """Hoàn nguyên CloneCD (.ccd+.img+.sub) → đĩa ảo chuẩn CUE+BIN."""
+    ccd = args.ccd.resolve()
+    img = ccd.with_suffix(".img")
+    sub = ccd.with_suffix(".sub")
+    out_dir = (args.output or ccd.parent / "restored").resolve()
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    bin_name = "Sango2_disc.bin"
+    cue_name = "Sango2_disc.cue"
+    bin_path = out_dir / bin_name
+    cue_path = out_dir / cue_name
+
+    if not img.exists():
+        print(f"FAIL: thiếu {img}")
+        return 1
+
+    # .img đã chứa toàn bộ 25 track — chỉ cần đổi tên chuẩn .bin + file .cue
+    if bin_path.exists():
+        bin_path.unlink()
+    try:
+        os.link(img, bin_path)
+        link_kind = "hardlink"
+    except OSError:
+        if args.copy:
+            print(f"Copy {img.name} → {bin_name} (~611 MB)...")
+            shutil.copy2(img, bin_path)
+            link_kind = "copy"
+        else:
+            # symlink as fallback (Windows cần quyền Developer Mode)
+            try:
+                bin_path.symlink_to(img.resolve())
+                link_kind = "symlink"
+            except OSError:
+                print("Không tạo được link — chạy lại với --copy")
+                return 1
+
+    cue_text = ccd_to_cue(ccd, bin_name)
+    cue_path.write_text(cue_text, encoding="ascii")
+
+    meta = parse_ccd(ccd)
+    readme = out_dir / "README.txt"
+    readme.write_text(
+        f"""Sango II — Đĩa đã hoàn nguyên
+================================
+
+Đã chuyển từ CloneCD (3 file) sang đĩa ảo chuẩn CUE+BIN.
+
+File trong thư mục này:
+  {cue_name}   — bảng track (mở bằng Notepad)
+  {bin_name}   — ảnh đĩa đầy đủ ({img.stat().st_size:,} bytes, {link_kind} từ {img.name})
+  README.txt   — file này
+
+Nội dung đĩa (giống CD gốc):
+  Track 1 DATA   — 11 game + CRACK/ + cài đặt
+  Track 2-25 AUDIO — nhạc Redbook ({len(meta['tracks']) - 1} track)
+
+DOSBox-X:
+  imgmount d "{cue_path.name}" -t cdrom
+
+Hoặc trỏ play_syllable.conf / launch_syllable.bat vào thư mục restored\\
+
+Ghi ra CD thật (Windows):
+  1. Cài ImgBurn (miễn phí)
+  2. Write image file to disc → chọn {cue_name}
+  3. Đốt xong có lại đĩa CD vật lý như xưa
+
+File CloneCD gốc (không cần nữa khi đã có CUE+BIN):
+  ../Sango2.ccd  ../Sango2.img  ../Sango2.sub
+""",
+        encoding="utf-8",
+    )
+
+    print(f"✓ Hoàn nguyên đĩa → {out_dir}")
+    print(f"  {cue_name}")
+    print(f"  {bin_name}  ({link_kind} ← {img.name})")
+    print(f"  README.txt")
+    print()
+    print("Chơi DOSBox:")
+    print(f'  imgmount d "{cue_path}" -t cdrom')
+    print()
+    print("Ghi CD thật: ImgBurn → Write image → chọn Sango2_disc.cue")
+    return 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="CloneCD .ccd+.img+.sub — phân tích, chuyển CUE, extract data"
+        description="CloneCD .ccd+.img+.sub — phân tích, chuyển CUE, extract, restore"
     )
     parser.add_argument("--ccd", type=Path, default=Path("Sango2.ccd"))
     sub = parser.add_subparsers(dest="cmd", required=True)
@@ -236,6 +323,18 @@ def main() -> int:
     p_c.add_argument("-o", "--output", type=Path)
     p_c.add_argument("--img-name", help="Tên file IMG trong CUE (mặc định Sango2.img)")
     p_c.set_defaults(func=cmd_cue)
+
+    p_r = sub.add_parser(
+        "restore",
+        help="Hoàn nguyên → Sango2_disc.cue + Sango2_disc.bin (1 đĩa ảo chuẩn)",
+    )
+    p_r.add_argument("-o", "--output", type=Path, help="Thư mục output (mặc định: restored/)")
+    p_r.add_argument(
+        "--copy",
+        action="store_true",
+        help="Copy .img → .bin thay vì hardlink (Windows portable)",
+    )
+    p_r.set_defaults(func=cmd_restore)
 
     p_e = sub.add_parser("extract", help="Extract track DATA ra thư mục")
     p_e.add_argument("-o", "--output", type=Path, required=True)

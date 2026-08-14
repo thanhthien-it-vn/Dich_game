@@ -24,7 +24,33 @@ Volume label: `PIONEERV01`
 
 ---
 
-## Hoan nguyen thanh 1 dia (ao)
+## Hoan nguyen thanh 1 dia (CUE + BIN)
+
+Chay 1 lenh:
+
+```powershell
+cd D:\Game\VigameV1.0
+python dich.py sango2-cd --game games\MyRPG restore --copy
+```
+
+Hoac double-click: `CD-ROM\Restore Disc.bat`
+
+Ket qua trong `CD-ROM\restored\`:
+```
+Sango2_disc.cue   — bang track (mo bang Notepad)
+Sango2_disc.bin   — ANH DIA DAY DU 611MB (data + 24 track nhac)
+README.txt
+```
+
+Day la **1 dia ao chuan** — tuong duong dia CD goc. Co the:
+- Mount DOSBox: `imgmount d Sango2_disc.cue -t cdrom`
+- Ghi ra dia CD that: **ImgBurn** → Write image file to disc
+
+3 file CloneCD goc (.ccd/.img/.sub) co the giu lam backup.
+
+---
+
+## Hoan nguyen thanh 1 dia (ao — da co san)
 
 3 file `.ccd + .img + .sub` **da la 1 dia day du**. Khong can gop lai.
 

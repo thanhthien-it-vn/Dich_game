@@ -264,6 +264,11 @@ def cmd_sango2_cd(args) -> int:
     if args.cd_cmd == "cue":
         if args.output:
             cmd.extend(["-o", str(args.output)])
+    elif args.cd_cmd == "restore":
+        if args.output:
+            cmd.extend(["-o", str(args.output)])
+        if args.copy:
+            cmd.append("--copy")
     elif args.cd_cmd == "extract":
         cmd.extend(["-o", str(args.output), "--only", args.only])
     return _run(cmd, f"Sango2 CD {args.cd_cmd}")
@@ -365,8 +370,9 @@ def main() -> int:
 
     p_cd = sub.add_parser("sango2-cd", help="Phân tích / convert / extract CD CloneCD")
     p_cd.add_argument("--game", type=Path, required=True)
-    p_cd.add_argument("cd_cmd", choices=["analyze", "cue", "extract"])
-    p_cd.add_argument("-o", "--output", type=Path, help="Output (cue/extract)")
+    p_cd.add_argument("cd_cmd", choices=["analyze", "cue", "restore", "extract"])
+    p_cd.add_argument("-o", "--output", type=Path, help="Output (cue/restore/extract)")
+    p_cd.add_argument("--copy", action="store_true", help="restore: copy .img→.bin (Windows)")
     p_cd.add_argument(
         "--only", choices=["all", "crack", "sango2-data"], default="all",
         help="extract: all | crack | sango2-data",

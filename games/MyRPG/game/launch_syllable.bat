@@ -4,8 +4,11 @@ setlocal
 
 cd /d C:\
 
-REM --- Mount CD-ROM (can MSCDEX + nhac Redbook track 2-25) ---
-REM Uu tien: Sango2.cue (tu .ccd) > .ccd > folder
+REM --- Mount CD-ROM: restored disc (uu tien) > cue > ccd ---
+if exist C:\CD-ROM\restored\Sango2_disc.cue (
+  imgmount d C:\CD-ROM\restored\Sango2_disc.cue -t cdrom
+  goto :cd_ok
+)
 if exist C:\CD-ROM\Sango2.cue (
   imgmount d C:\CD-ROM\Sango2.cue -t cdrom
   goto :cd_ok

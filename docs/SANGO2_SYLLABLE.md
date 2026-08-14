@@ -70,8 +70,7 @@ mount c "D:\Game\VigameV1.0\games\MyRPG\game"
 
 ```powershell
 git lfs pull
-python dich.py sango2-cd --game games\MyRPG analyze
-python dich.py sango2-cd --game games\MyRPG cue
+python dich.py sango2-cd --game games\MyRPG restore --copy
 Play Sango2 Syllable.bat
 ```
 

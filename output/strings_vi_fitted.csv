@@ -1,0 +1,4 @@
+key,text,text_fitted,strategy,width_px
+intro,Chào mừng đến với trò chơi,Chào!,siêu ngắn (rules),80
+menu_start,Bắt đầu chơi,Chơi,siêu ngắn (rules),64
+dialog,Xin chào,chao,lấy từ cuối,64

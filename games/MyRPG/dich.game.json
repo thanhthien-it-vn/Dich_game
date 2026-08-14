@@ -1,9 +1,10 @@
 {
-  "name": "MyRPG",
+  "name": "Tam Quoc Chi 2 (Sango II)",
   "source_lang": "cn",
-  "encoding": "gbk",
+  "encoding": "big5",
   "font_profile": "win95_16_syllable",
   "font_mode": "syllable",
+  "game_adapter": "sango2",
   "cell_width": 16,
   "cell_height": 16,
   "paths": {
@@ -18,6 +19,5 @@
     "insured": "strings/insured.csv",
     "encoded": "strings/vi.gbk.csv"
   },
-  "notes": "font_mode: letter | syllable. Syllable: profile win95_16_syllable, 1 tiếng = 1 ô GBK.",
-  "toolkit": "/workspace"
+  "notes": "Sango II DOS Big5 — syllable có dấu. Pipeline: tools/adapters/sango2/pipeline.py"
 }

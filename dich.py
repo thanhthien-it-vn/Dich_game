@@ -226,6 +226,18 @@ def cmd_check(args) -> int:
     ], "Kiểm tra tràn UI")
 
 
+def cmd_sango2(args) -> int:
+    cmd = [
+        sys.executable, str(TOOLKIT / "tools/adapters/sango2/pipeline.py"),
+        "--game", str(args.game),
+    ]
+    if args.patch_exe:
+        cmd.append("--patch-exe")
+    if args.patch_font:
+        cmd.append("--patch-font")
+    return _run(cmd, "Sango2 syllable pipeline")
+
+
 def cmd_pipeline(args) -> int:
     cfg = load_game_config(args.game)
     steps = [cmd_extract, cmd_build_font, cmd_fit]
@@ -304,6 +316,12 @@ def main() -> int:
     p_pipe.add_argument("--game", type=Path, required=True)
     p_pipe.add_argument("--with-check", action="store_true")
     p_pipe.set_defaults(func=cmd_pipeline)
+
+    p_sango2 = sub.add_parser("sango2", help="Pipeline Sango II syllable có dấu")
+    p_sango2.add_argument("--game", type=Path, required=True)
+    p_sango2.add_argument("--patch-exe", action="store_true")
+    p_sango2.add_argument("--patch-font", action="store_true")
+    p_sango2.set_defaults(func=cmd_sango2)
 
     args = parser.parse_args()
     return args.func(args)

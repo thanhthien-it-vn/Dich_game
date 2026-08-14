@@ -3,3 +3,5 @@ __pycache__/
 .pytest_cache/
 .pack_staging/
 output/win95_16_syllable/
+games/MyRPG/game/CD-ROM/restored/Sango2_disc.bin
+games/MyRPG/game/_runtime.conf

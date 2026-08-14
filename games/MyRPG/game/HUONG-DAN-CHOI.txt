@@ -1,88 +1,22 @@
-Tam Quoc Chi 2 (Sango II) — Huong dan choi co dau + nhac CD
-================================================================
+Tam Quoc Chi 2 — CLICK AND PLAY
+================================
 
-=== BUOC 1: PULL VE MAY ===
-
-  cd D:\Game\VigameV1.0
   git pull
-  git lfs pull          ← BAT BUOC! tai Sango2.img (~611MB) + .sub
-
-Neu chua cai Git LFS:
-  git lfs install
   git lfs pull
 
-=== BUOC 2: CAU HINH DUONG DAN (1 lan) ===
+  Double-click:  PLAY.bat
 
-Mo file:  games\MyRPG\game\play_syllable.conf
+Xong. Khong can mount, khong can Python, khong can sua config.
 
-Sua dong mount c cho dung o dia game cua ban, vi du:
-  mount c "D:\Game\VigameV1.0\games\MyRPG\game"
+PLAY.bat tu dong:
+  1. Tao dia CD (Sango2_disc.bin tu .img)
+  2. Deploy font + EXE tieng Viet co dau
+  3. Mo DOSBox-X — mount C: + D: (nhac CD)
+  4. Chay SAN2-VN.EXE
 
-Can co DOSBox-X:  C:\DOSBox-X\dosbox-x.exe
-(Neu khac, sua duong dan trong Play Sango2 Syllable.bat)
+Can cai DOSBox-X: https://dosbox-x.com/
+  (tu tim: C:\DOSBox-X\ hoac Program Files)
 
-=== BUOC 3: SETUP LAN DAU (1 lan) ===
+Can Git LFS 1 lan:  git lfs pull  (tai Sango2.img ~611MB)
 
-Chay lan luot (double-click):
-
-  1) games\MyRPG\game\CD-ROM\Restore Disc.bat
-     → tao CD-ROM\restored\Sango2_disc.cue + .bin (dia PIONEERV01)
-
-  2) games\MyRPG\game\Deploy Syllable.bat
-     → copy font + EXE tieng Viet co dau vao SANGO2\
-
-Hoac 1 lenh PowerShell:
-  cd D:\Game\VigameV1.0
-  python dich.py sango2-cd --game games\MyRPG restore --copy
-  python dich.py sango2-deploy --game games\MyRPG
-
-=== BUOC 4: CHOI GAME ===
-
-  Double-click:  games\MyRPG\game\Play Sango2 Syllable.bat
-
-Tu dong khi vao DOSBox:
-  ✓ mount o C: = thu muc game
-  ✓ imgmount o D: = dia CD (Sango2_disc.cue) → CO NHAC
-  ✓ deploy font + EXE syllable
-  ✓ chay SAN2-VN.EXE
-
-Trong cua so DOSBox phai thay:
-  "CD-ROM mounted as D:"
-  roi game chay.
-
-=== KHONG DUNG ===
-
-  x Play Sango2 VN.bat      (repo cu, ASCII khong dau)
-  x play_vn.conf            (tro D:\Game\SAN — sai)
-  x build_vn_release.bat      (tool cu khong dau)
-
-=== LOI THUONG GAP ===
-
-  "CD-ROM Driver not found"
-    → chua git lfs pull, hoac chua chay Restore Disc.bat
-
-  "吩坏" / chu loi
-    → chua chay Deploy Syllable.bat
-
-  Khong co nhac
-    → CD chua mount — kiem tra co dong "CD-ROM mounted as D:"
-    → Can Sango2_disc.cue + .bin (track audio 2-25)
-
-  Dosbox khong tim thay
-    → cai DOSBox-X, dat tai C:\DOSBox-X\
-
-=== PHIM DOSBOX-X ===
-
-  Alt+Enter     fullscreen
-  Ctrl+F9       thoat
-  F8            tang toc (cycles)
-
-=== CAU TRUC THU MUC ===
-
-  game\SANGO2\           game da cai + patch
-  game\CD-ROM\           dia CD CloneCD goc (.ccd .img .sub)
-  game\CD-ROM\restored\  dia da hoan nguyen (.cue .bin)
-  game\patch\            SAN2-SYLLABLE.EXE
-  games\MyRPG\font\      font tieng Viet co dau
-
-Volume label dia CD goc: PIONEERV01
+Phim: Alt+Enter fullscreen | Ctrl+F9 thoat

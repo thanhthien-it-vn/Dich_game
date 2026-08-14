@@ -56,6 +56,10 @@ def apply_cli_overrides(cfg: FontConfig, args: argparse.Namespace) -> FontConfig
         cfg.export_bmfont = False
     if args.no_strip:
         cfg.export_strip = False
+    if getattr(args, "composite", False):
+        cfg.composite = True
+    if getattr(args, "engine", None):
+        cfg.engine = args.engine
     return cfg
 
 
@@ -81,6 +85,8 @@ def main() -> int:
     parser.add_argument("--threshold", type=int, help="Ngưỡng chuyển 1-bit (mặc định 140)")
     parser.add_argument("--no-bmfont", action="store_true")
     parser.add_argument("--no-strip", action="store_true")
+    parser.add_argument("--composite", action="store_true", help="Render composite base+dấu (FreeType)")
+    parser.add_argument("--engine", choices=["freetype", "pillow"], help="Backend render")
     parser.add_argument("--preview", type=str, help="Câu demo xuất preview.png")
     args = parser.parse_args()
 
@@ -103,11 +109,35 @@ def main() -> int:
         return 1
 
     chars = load_chars(chars_path)
-    atlas, glyphs, cell_w, cell_h = generate_atlas(chars, cfg)
+
+    if cfg.composite:
+        from render_composite import CompositeConfig, render_composite_atlas
+
+        cw = cfg.cell_width or cfg.size
+        ch = cfg.cell_height or cfg.size
+        cc = CompositeConfig(
+            font_path=str(font_path),
+            cell_w=cw,
+            cell_h=ch,
+            body_size=cfg.size,
+            scale=cfg.scale,
+            engine=cfg.engine,
+            threshold=cfg.threshold,
+        )
+        atlas, glyphs, cell_w, cell_h = render_composite_atlas(chars, cc, cfg.cols)
+        if cfg.one_bit:
+            gray = atlas.convert("L")
+            bw = gray.point(lambda p: 255 if p >= cfg.threshold else 0, mode="1")
+            atlas = bw.convert("RGBA")
+        render_mode = "composite+" + cfg.engine
+    else:
+        atlas, glyphs, cell_w, cell_h = generate_atlas(chars, cfg)
+        render_mode = cfg.render
 
     meta = {
         "name": cfg.name,
-        "render": cfg.render,
+        "render": render_mode,
+        "composite": cfg.composite,
         "monospace": cfg.monospace,
         "one_bit": cfg.one_bit,
         "notes": cfg.notes,

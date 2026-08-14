@@ -90,7 +90,69 @@ python3 tools/l10n/check_strings.py --atlas output/win95_16/atlas.json \
 7. Patch binary + hook vi_draw_utf8()
 ```
 
-### Tối ưu chuỗi dịch (viết tắt / bỏ dấu)
+### Công nghệ: Việt hóa CÓ DẤU (mục tiêu vô cực)
+
+### Vấn đề gốc
+
+Game CJK dùng cell **16×16 fullwidth**. Tiếng Việt Latin có dấu **cao hơn** → dấu bị cắt nếu render TTF thuần.
+
+### Giải pháp đã tích hợp
+
+| Lớp | Công nghệ | Mục đích |
+|-----|-----------|----------|
+| **Composite glyph** | Unicode NFD + vùng dấu 28% / thân 72% | Dấu sắc/huyền/hỏi/ngã/nặng trong 12×12, 16×16 |
+| **FreeType autohint** | `freetype-py` FT_LOAD_TARGET_MONO | Nét pixel sắc như font game gốc |
+| **fonttools** | Subset, metrics, export | Pipeline font chuyên nghiệp |
+| **uharfbuzz** | HarfBuzz shaping | Sẵn sàng cho mix Hán-Việt |
+| **smart_fit** | Paraphrase **giữ dấu** | Rút câu không bỏ thanh điệu |
+| **fit_text** | Viết tắt + bỏ dấu (fallback) | UI cực chật |
+
+### Build font composite (CÓ DẤU)
+
+```bash
+pip install -r requirements.txt
+
+# Win95 16×16 — FreeType composite
+python3 tools/font_atlas/generate.py --profile profiles/win95_16_composite.json
+
+# DOS 12×12 1-bit composite
+python3 tools/font_atlas/generate.py --profile profiles/dos_12_composite.json
+```
+
+### Smart fit — rút câu GIỮ DẤU
+
+```bash
+# Không bao giờ bỏ dấu — chỉ paraphrase
+python3 tools/l10n/smart_fit_cli.py "Chào mừng đến với trò chơi" \
+  --max-width 96 --atlas output/win95_16/atlas.json
+# → Chào! (80px, có dấu)
+
+python3 tools/l10n/smart_fit_cli.py --csv strings_vi.csv --original strings_cn.csv \
+  --atlas output/win95_16/atlas.json -o strings_vi_smart.csv
+```
+
+Rules: `tools/l10n/paraphrase_rules.json` (exact, synonyms, patterns)
+
+### Hướng R&D tiếp (stack đồ sộ)
+
+| Công nghệ | Ứng dụng |
+|-----------|----------|
+| **msdf-atlas-gen** | Font scale mượt game Win98+ / OpenGL |
+| **rectpack** | Atlas variable-width tiết kiệm VRAM |
+| **OpenCV morphology** | Cleanup 1-bit DOS |
+| **LLM constrained decode** | Paraphrase có dấu theo pixel budget |
+| **Neural bitmap font** | Train 12×12 VN glyph giống font game gốc |
+| **Patch UI engine** | Nới hộp thoại + word-wrap thay rút câu |
+
+### Pipeline đầy đu cho CÓ DẤU
+
+```
+1. Font composite (FreeType) → dấu trong cell
+2. smart_fit → rút câu giữ dấu
+3. Nếu vẫn tràn → patch UI (nới box) HOẶC fit_text (bỏ dấu — cuối cùng)
+```
+
+## Tối ưu chuỗi dịch (viết tắt / bỏ dấu — fallback)
 
 ```bash
 # Một câu — giới hạn 96px (6 ký tự CJK gốc × 16px)

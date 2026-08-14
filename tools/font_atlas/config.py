@@ -26,6 +26,8 @@ class FontConfig:
     baseline_offset: int = 0
     export_bmfont: bool = True
     export_strip: bool = True
+    composite: bool = False  # tách base+dấu cho cell nhỏ
+    engine: str = "freetype"  # freetype | pillow
     chars: str = "chars_vi.txt"
     out: str = "output/font_16"
     notes: str = ""

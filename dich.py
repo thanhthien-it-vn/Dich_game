@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
 """
-Dich_game — CLI chính.
+VigameV1.0 — CLI việt hóa game Trung/Nhật retro.
 
-Một entry point cho toàn bộ pipeline. Chạy từ toolkit, trỏ tới thư mục game.
+Entry point cho toàn bộ pipeline. Chạy từ toolkit, trỏ tới thư mục game.
 
 Ví dụ:
-  python3 dich.py init ../games/MyRPG --encoding gbk
+  python3 dich.py init ../games/MyRPG --encoding gbk --profile win95_16_syllable
   python3 dich.py extract --game ../games/MyRPG
-  python3 dich.py build-font --game ../games/MyRPG
-  python3 dich.py fit --game ../games/MyRPG
+  python3 dich.py build-font-syllable --game ../games/MyRPG
+  python3 dich.py encode --game ../games/MyRPG
   python3 dich.py pipeline --game ../games/MyRPG
   python3 dich.py status --game ../games/MyRPG
+
+Docs: docs/00-START-HERE.md | AI: docs/AI_AGENT_GUIDE.md
 """
 
 from __future__ import annotations
@@ -73,8 +75,16 @@ def cmd_extract(args) -> int:
     ], f"Extract từ {target.name}")
 
 
+def _is_syllable_mode(cfg: dict) -> bool:
+    mode = cfg.get("font_mode", "")
+    profile = cfg.get("font_profile", "")
+    return mode == "syllable" or "syllable" in profile
+
+
 def cmd_build_font(args) -> int:
     cfg = load_game_config(args.game)
+    if _is_syllable_mode(cfg):
+        return cmd_build_font_syllable(args)
     profile = TOOLKIT / "profiles" / f"{cfg['font_profile']}.json"
     if not profile.exists():
         print(f"Profile không tồn tại: {profile}", file=sys.stderr)
@@ -113,6 +123,69 @@ def cmd_build_font(args) -> int:
     cmd += ["--preview", preview[:60]]
 
     return _run(cmd, f"Build font → {font_dir}")
+
+
+def cmd_build_font_syllable(args) -> int:
+    cfg = load_game_config(args.game)
+    profile = TOOLKIT / "profiles" / f"{cfg['font_profile']}.json"
+    if not profile.exists():
+        print(f"Profile không tồn tại: {profile}", file=sys.stderr)
+        return 1
+
+    font_dir = args.game / cfg["paths"]["font_dir"]
+    font_dir.mkdir(parents=True, exist_ok=True)
+
+    vi_csv = args.game / cfg["files"]["translated"]
+    insured = args.game / cfg["files"].get("insured", "strings/insured.csv")
+
+    cmd = [
+        sys.executable, str(TOOLKIT / "tools/font_atlas/generate_syllable.py"),
+        "--profile", str(profile),
+        "--out", str(font_dir),
+    ]
+    if vi_csv.exists():
+        cmd += ["--csv", str(vi_csv)]
+    if insured.exists():
+        cmd += ["--csv", str(insured)]
+
+    preview = "Chào mừng đến Trung Quốc — HP MP"
+    if vi_csv.exists():
+        import csv
+        with vi_csv.open(encoding="utf-8") as f:
+            rows = list(csv.DictReader(f))
+            if rows:
+                preview = rows[0].get("text", preview)
+    cmd += ["--preview", preview[:80]]
+
+    return _run(cmd, f"Build syllable font → {font_dir}")
+
+
+def cmd_encode(args) -> int:
+    cfg = load_game_config(args.game)
+    font_dir = args.game / cfg["paths"]["font_dir"]
+    smap = font_dir / "syllable_map.json"
+    if not smap.exists():
+        print("Chưa có syllable_map.json — chạy build-font (syllable) trước", file=sys.stderr)
+        return 1
+
+    vi = args.game / cfg["files"]["translated"]
+    out = args.game / cfg["files"].get("encoded", "strings/vi.gbk.csv")
+    text_col = "text"
+    if getattr(args, "insured", False):
+        vi = args.game / cfg["files"]["insured"]
+        text_col = "text_insured"
+
+    if not vi.exists():
+        print(f"Không tìm thấy: {vi}", file=sys.stderr)
+        return 1
+
+    return _run([
+        sys.executable, str(TOOLKIT / "tools/l10n/syllable_encode.py"),
+        "--map", str(smap),
+        "--csv", str(vi),
+        "-o", str(out),
+        "--text-col", text_col,
+    ], f"Encode syllable → GBK ({out.name})")
 
 
 def cmd_fit(args) -> int:
@@ -154,7 +227,10 @@ def cmd_check(args) -> int:
 
 
 def cmd_pipeline(args) -> int:
+    cfg = load_game_config(args.game)
     steps = [cmd_extract, cmd_build_font, cmd_fit]
+    if _is_syllable_mode(cfg):
+        steps.append(cmd_encode)
     if args.with_check:
         steps.append(cmd_check)
     for fn in steps:
@@ -172,7 +248,8 @@ def cmd_status(args) -> int:
     print(f"Game:     {cfg['name']}")
     print(f"Root:     {args.game}")
     print(f"Toolkit:  {TOOLKIT}")
-    print(f"Encoding: {cfg['encoding']} | Profile: {cfg['font_profile']}")
+    mode = cfg.get("font_mode") or ("syllable" if "syllable" in cfg.get("font_profile", "") else "letter")
+    print(f"Encoding: {cfg['encoding']} | Profile: {cfg['font_profile']} | Mode: {mode}")
     print(f"{'='*50}")
 
     checks = [
@@ -181,6 +258,8 @@ def cmd_status(args) -> int:
         ("strings/vi.csv", args.game / cfg["files"]["translated"]),
         ("strings/insured.csv", args.game / cfg["files"]["insured"]),
         ("font/atlas.png", args.game / cfg["paths"]["font_dir"] / "atlas.png"),
+        ("font/syllable_map.json", args.game / cfg["paths"]["font_dir"] / "syllable_map.json"),
+        ("strings/vi.gbk.csv", args.game / cfg["files"].get("encoded", "strings/vi.gbk.csv")),
     ]
     for label, path in checks:
         mark = "✓" if path.exists() else "○"
@@ -206,7 +285,8 @@ def main() -> int:
 
     for name, help_text, func in [
         ("extract", "Trích chuỗi CN/JP từ binary game", cmd_extract),
-        ("build-font", "Build font VI cho game", cmd_build_font),
+        ("build-font", "Build font VI cho game (letter hoặc syllable)", cmd_build_font),
+        ("build-font-syllable", "Build font syllable (1 tiếng = 1 ô)", cmd_build_font_syllable),
         ("fit", "Tối ưu chuỗi 3 tầng bảo hiểm", cmd_fit),
         ("check", "Kiểm tra tràn UI", cmd_check),
         ("status", "Xem trạng thái workspace", cmd_status),
@@ -215,7 +295,12 @@ def main() -> int:
         p.add_argument("--game", type=Path, required=True)
         p.set_defaults(func=func)
 
-    p_pipe = sub.add_parser("pipeline", help="extract → build-font → fit")
+    p_encode = sub.add_parser("encode", help="Encode bản dịch → byte GBK syllable")
+    p_encode.add_argument("--game", type=Path, required=True)
+    p_encode.add_argument("--insured", action="store_true", help="Encode insured.csv thay vi.csv")
+    p_encode.set_defaults(func=cmd_encode)
+
+    p_pipe = sub.add_parser("pipeline", help="extract → build-font → fit [→ encode nếu syllable]")
     p_pipe.add_argument("--game", type=Path, required=True)
     p_pipe.add_argument("--with-check", action="store_true")
     p_pipe.set_defaults(func=cmd_pipeline)

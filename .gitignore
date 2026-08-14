@@ -1,3 +1,5 @@
 __pycache__/
 *.pyc
 .pytest_cache/
+.pack_staging/
+output/win95_16_syllable/

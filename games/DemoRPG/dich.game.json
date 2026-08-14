@@ -1,9 +1,9 @@
 {
-  "name": "Tên game",
+  "name": "Demo RPG",
   "source_lang": "cn",
   "encoding": "gbk",
-  "font_profile": "win95_16_composite",
-  "font_mode": "letter",
+  "font_profile": "win95_16_syllable",
+  "font_mode": "syllable",
   "cell_width": 16,
   "cell_height": 16,
   "paths": {
@@ -18,5 +18,6 @@
     "insured": "strings/insured.csv",
     "encoded": "strings/vi.gbk.csv"
   },
-  "notes": "font_mode: letter | syllable. Syllable: profile win95_16_syllable, 1 tiếng = 1 ô GBK."
+  "notes": "Syllable mode demo — 1 tiếng Việt = 1 ô GBK.",
+  "toolkit": "/workspace"
 }

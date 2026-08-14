@@ -83,8 +83,38 @@ python3 tools/l10n/check_strings.py --atlas output/win95_16/atlas.json \
 | `win95_16` | RPG Win95 CN/JP | 16×16 |
 | `win95_14` | Dialogue proportional | ~14px |
 | `win95_16_bold` | Tiêu đề | 16×16 bold |
+| `win95_16_syllable` | **Syllable mode** — 1 tiếng = 1 ô GBK | 16×16 |
 
-## Output mỗi lần build
+## Syllable mode (1 tiếng = 1 ô — như chữ Hán)
+
+Mỗi **tiếng Việt** vẽ thành **1 glyph 16×16**, map sang **2 byte GBK** thay chữ Hán.
+`"Trung Quốc"` = **2 ô** (thay vì ~10 ký tự letter-mode).
+
+```bash
+# Khởi tạo game syllable
+python3 dich.py init ~/games/MyRPG --encoding gbk --profile win95_16_syllable
+# Sửa dich.game.json: "font_mode": "syllable"
+
+# Build atlas + encode GBK
+python3 dich.py build-font-syllable --game ~/games/MyRPG
+python3 dich.py encode --game ~/games/MyRPG
+
+# Hoặc pipeline đầy đủ (tự encode nếu font_mode=syllable)
+python3 dich.py pipeline --game ~/games/MyRPG
+```
+
+Output thêm: `syllable_map.json`, `syllable_map.bin`, `vi_syllables.h`, `strings/vi.gbk.csv`, `preview.png`
+
+```bash
+# Thử nhanh
+python3 tools/font_atlas/generate_syllable.py \
+  --profile profiles/win95_16_syllable.json \
+  --csv strings/vi.csv --preview "Chào mừng đến Trung Quốc"
+
+python3 tools/l10n/syllable_encode.py \
+  --map font/syllable_map.json --text "Trung Quốc"
+```
+
 
 `atlas.png`, `atlas.json`, `atlas.bin`, `atlas.fnt`, `atlas_strip.png`, `vi_glyphs.h`, `preview.png`
 

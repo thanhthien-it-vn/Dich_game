@@ -19,6 +19,10 @@ type VERSION
 # → VigameV1.0
 ```
 
+**Cập nhật:** `git pull origin main` hoặc chạy `scripts\PULL_VIGAME.bat`
+
+**Release chính thức:** https://github.com/thanhthien-it-vn/Dich_game/releases/tag/VigameV1.0
+
 ---
 
 ## Cách 2 — Tải ZIP

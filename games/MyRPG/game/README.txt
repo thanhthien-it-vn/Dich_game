@@ -15,5 +15,6 @@ Cai dat lan dau:
 Build ban dich:
   repo\scripts\build_vn_release.bat
 
-CD image:
-  D:\Game\VigameV1.0\games\MyRPG\game\Sango2\Sango2.ccd
+CD image (dat vao CD-ROM\):
+  games\MyRPG\game\CD-ROM\Sango2.cue + Sango2.bin
+  (hoac copy noi dung dia CD vao thu muc CD-ROM)

@@ -61,6 +61,19 @@ mount c "D:\Game\VigameV1.0\games\MyRPG\game"
 
 **Không** dùng `play_vn.conf` cũ (trỏ `D:\Game\SAN` — sai thư mục).
 
+### CD-ROM (nhạc hay)
+
+Lỗi `CD-ROM Driver not found !` = chưa mount ổ D:.
+
+1. Copy đĩa CD game vào `games\MyRPG\game\CD-ROM\`:
+   - **Khuyên dùng:** `Sango2.cue` + `Sango2.bin` (có Redbook audio)
+   - Hoặc `Sango2.ccd` + `.img`
+   - Hoặc copy nguyên nội dung đĩa CD (file `SANGO.WAV` ~25MB, v.v.)
+
+2. `play_syllable.conf` + `launch_syllable.bat` tự mount CD trước khi chạy game.
+
+Volume label gốc: `PIONEERV.01` (xem `logs/CD_LIST.TXT`).
+
 ### Kiểm tra
 
 ```powershell

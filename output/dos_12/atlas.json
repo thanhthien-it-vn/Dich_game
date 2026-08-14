@@ -2988,6 +2988,7 @@
   "profile": {
     "name": "dos_12",
     "render": "pixel",
+    "composite": false,
     "monospace": true,
     "one_bit": true,
     "notes": "Font 12x12 monospace, 1-bit — phổ biến RPG DOS/early Win"

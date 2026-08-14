@@ -1,0 +1,20 @@
+{
+  "name": "Tên game",
+  "source_lang": "cn",
+  "encoding": "gbk",
+  "font_profile": "win95_16_composite",
+  "cell_width": 16,
+  "cell_height": 16,
+  "paths": {
+    "game_dir": "game",
+    "strings_dir": "strings",
+    "font_dir": "font",
+    "patch_dir": "patch"
+  },
+  "files": {
+    "extracted": "strings/extracted.csv",
+    "translated": "strings/vi.csv",
+    "insured": "strings/insured.csv"
+  },
+  "notes": "Sửa encoding: gbk | shift_jis. Profile: xem profiles/ trong toolkit."
+}

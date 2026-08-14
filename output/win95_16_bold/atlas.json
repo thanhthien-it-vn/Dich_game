@@ -2988,6 +2988,7 @@
   "profile": {
     "name": "win95_16_bold",
     "render": "pixel",
+    "composite": false,
     "monospace": true,
     "one_bit": false,
     "notes": "Tiêu đề / tên skill — đậm hơn body text"

@@ -2988,6 +2988,7 @@
   "profile": {
     "name": "win95_14",
     "render": "pixel",
+    "composite": false,
     "monospace": false,
     "one_bit": false,
     "notes": "Font 14px proportional — dialogue Win95"

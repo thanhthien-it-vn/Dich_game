@@ -2988,6 +2988,7 @@
   "profile": {
     "name": "win95_16",
     "render": "pixel",
+    "composite": false,
     "monospace": true,
     "one_bit": false,
     "notes": "Font 16x16 monospace — menu/UI Win95 RPG Trung Quốc"

@@ -1,5 +1,15 @@
 # Dich_game — Việt hóa game Trung / Nhật (DOS & Win95–98)
 
+**Toolkit đóng gói** — 1 thư mục cố định, mỗi game 1 workspace riêng.
+
+→ **Cách dùng Cursor Cloud:** xem [CURSOR.md](CURSOR.md)
+
+```bash
+pip install -r requirements.txt
+python3 dich.py init ~/games/MyRPG --encoding gbk
+python3 dich.py pipeline --game ~/games/MyRPG
+```
+
 Toolkit tạo **font tiếng Việt** + xử lý **nguồn Trung (GBK) / Nhật (Shift-JIS)** cho game retro.
 
 ## Phạm vi

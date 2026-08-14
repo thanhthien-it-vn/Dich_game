@@ -144,6 +144,35 @@ Rules: `tools/l10n/paraphrase_rules.json` (exact, synonyms, patterns)
 | **Neural bitmap font** | Train 12×12 VN glyph giống font game gốc |
 | **Patch UI engine** | Nới hộp thoại + word-wrap thay rút câu |
 
+### Pipeline 3 tầng bảo hiểm (khuyến nghị)
+
+```
+T1  CÓ DẤU          → paraphrase ("Chào!")
+T2  Viết tắt có dấu → N.vật, Ch.mừng
+T3  Bảo hiểm        → HP/MP/EXP + VI không dấu  ← tầng fallback
+```
+
+Tự động thử T1 → T2 → T3 cho đến khi vừa pixel:
+
+```bash
+python3 tools/l10n/fit_insurance_cli.py "Chào mừng đến với trò chơi" \
+  --max-width 96 --atlas output/win95_16/atlas.json
+
+python3 tools/l10n/fit_insurance_cli.py "Sinh mạng và năng lượng còn đầy" \
+  --max-width 160 --atlas output/win95_16/atlas.json --show-tiers
+
+python3 tools/l10n/fit_insurance_cli.py --csv strings_vi.csv --original strings_cn.csv \
+  --atlas output/win95_16/atlas.json -o strings_insured.csv
+```
+
+Config: `tools/l10n/insurance_tiers.json` (english_terms, tier3_phrases)
+
+| Tầng | Khi dùng | Ví dụ |
+|------|----------|-------|
+| **T1** | UI đủ rộng | `Chào!`, `Bắt đầu` |
+| **T2** | Hơi chật | `N.vật`, `Chơi` |
+| **T3** | Cực chật / stat | `HP MP full`, `Chao!` |
+
 ### Pipeline đầy đu cho CÓ DẤU
 
 ```

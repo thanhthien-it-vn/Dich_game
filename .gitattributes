@@ -1,0 +1,2 @@
+games/MyRPG/game/CD-ROM/*.img filter=lfs diff=lfs merge=lfs -text
+games/MyRPG/game/CD-ROM/*.sub filter=lfs diff=lfs merge=lfs -text
